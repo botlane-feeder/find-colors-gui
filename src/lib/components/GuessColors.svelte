@@ -4,7 +4,7 @@
     colors: number[],
     isPicker?: boolean
   }
-  let {colors, isPicker=false}:P = $props();
+  let {colors=$bindable(), isPicker=false}:P = $props();
 
   let colorsM:string[] = $state(["grey", "grey", "grey", "grey"]);
 

@@ -3,25 +3,25 @@
   import ColorControl from "$lib/components/ColorControl.svelte"
 
   interface P {
-    colors:number[],
-    control: number[]
+    attemptStack : { colors:number[], control: number[] }[],
+    attempt : number[],
+    verify: boolean
   }
-  let data : P[] = [
-    {colors:[5,1,2,3], control:[2,1,1,0]}
-  ];
-  let attempt = $state([0,0,0,0]);
+  let {attemptStack=$bindable(), attempt=$bindable(), verify=$bindable()}:P = $props();
+  let isComplete = $derived( attempt.every((element)=>{return element != 0}) );
+
 </script>
 
 <div class="container">
-  {#each data as oneData}
+  {#each attemptStack as oneAttempt}
   <div class="oneGuess">
-    <GuessColors colors={oneData["colors"]}/>
-    <ColorControl control={oneData["control"]}/>
+    <GuessColors colors={oneAttempt["colors"]}/>
+    <ColorControl control={oneAttempt["control"]}/>
   </div>
   {/each}
   <div class="oneGuess">
-    <GuessColors colors={attempt} isPicker={true}/>
-    <button>Valider</button>
+    <GuessColors bind:colors={attempt} isPicker={true}/>
+    <button onclick={()=>{verify=true;}} disabled={!isComplete}>Valider</button>
   </div>
 </div>
 
