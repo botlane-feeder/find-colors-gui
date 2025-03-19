@@ -1,14 +1,19 @@
 <script lang="ts">
   import ColorCell from "./ColorCell.svelte"
+  interface P {
+    colors: number[],
+    isPicker?: boolean
+  }
+  let {colors, isPicker=false}:P = $props();
 
-  let colors:string[] = $state(["grey", "grey", "grey", "grey"]);
+  let colorsM:string[] = $state(["grey", "grey", "grey", "grey"]);
 
 </script>
 
 <div class="container">
   <div class="colors">
     {#each [0,1,2,3] as index}
-      <ColorCell bind:color={colors[index]}/>
+      <ColorCell bind:colorNumber={colors[index]} {isPicker}/>
     {/each}
   </div>
 </div>
@@ -19,7 +24,6 @@
 
   }
   .colors{
-    border: black solid 1px;
     min-width: 250px;
     height: 100px;
     /* display: flex; */

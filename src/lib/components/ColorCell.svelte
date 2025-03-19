@@ -1,8 +1,9 @@
 <script lang="ts">
   import ColorPicker from "./ColorPicker.svelte"
 
-  let {color=$bindable()}:{color:string} = $props();
+  let {colorNumber=$bindable(), isPicker}:{colorNumber:number, isPicker:boolean} = $props();
 
+  let colorData = ["grey", "red", "green", "blue", "yellow", "magenta", "orange"];
   let colorPickerShown=$state(false);
 
   function selectColor(){
@@ -14,10 +15,10 @@
 
 <div class="container">
   <!-- svelte-ignore a11y_click_events_have_key_events-->
-  <div class="cell" onclick={selectColor} tabindex="0" role="button" style="background-color : {color};"></div>
+  <div class="cell" class:isPicker onclick={selectColor} tabindex="0" role="button" style="background-color : {colorData[colorNumber]};"></div>
 
-  {#if colorPickerShown}
-  <div class="picker"><ColorPicker bind:show={colorPickerShown} bind:color={color}/>  </div>
+  {#if colorPickerShown && isPicker}
+  <div class="picker"><ColorPicker bind:show={colorPickerShown} bind:colorNumber={colorNumber} {colorData}/>  </div>
   {/if}
 </div>
 
@@ -32,10 +33,11 @@
     border-radius: 50px;
     border: grey solid 1px;
     background-color: white;
+  }
+  .isPicker{
     cursor: pointer;
   }
-  
-  .cell:hover{
+  .isPicker:hover{
     border: grey solid 3px;
   }
   

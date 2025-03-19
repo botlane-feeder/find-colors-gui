@@ -1,18 +1,24 @@
 <script lang="ts">
-  let {show=$bindable(), color=$bindable()}:{show:boolean, color:string} = $props();
-  let colors = ["red", "green", "blue", "yellow", "magenta", "orange"];
+  interface P {
+    show:boolean,
+    colorNumber:number,
+    colorData:string[]
+  }
+  let {show=$bindable(), colorNumber=$bindable(), colorData}:P = $props();
 
-  function selectColor(oneColor:string){
-    color = oneColor;
+  function selectColor(oneColor:number){
+    colorNumber = oneColor;
     show=false;
   }
 
 </script>
 
 <div class="container">
-  {#each colors as oneColor}
-  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-    <div class="circleColor" style="background-color: {oneColor}" onclick={()=>{selectColor(oneColor)}} tabindex="0" role="button"></div>
+  {#each colorData as oneColor, index}
+    {#if index != 0}
+      <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+      <div class="circleColor" style="background-color: {oneColor}" onclick={()=>{selectColor(index)}} tabindex="0" role="button"></div>
+    {/if}
   {/each}
 </div>
 
