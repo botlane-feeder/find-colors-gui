@@ -2,15 +2,12 @@
   import FindColors from "$lib/FindColors.svelte"
 
   let level = "soft"; // Tri le control des couleurs
-  // let solution = [3,2,3,1];
   let solution = [3,2,1,5];
   interface P {
     colors:number[],
     control: number[]
   }
-  let attemptStack : P[] = $state([
-    {colors:[5,1,2,3], control:[2,1,1,0]}
-  ]);
+  let attemptStack : P[] = $state([]);
   let attempt = $state([0,0,0,0]);
   let verify=$state(false);
   $effect(()=>{
@@ -26,6 +23,7 @@
       // Ajout de la tentative et son controle de couleur
       attemptStack.push({colors:{ ...attempt}, control:getControlColor(attempt, solution)});
       attempt=[0,0,0,0];
+      // TODO : Vérification de la victoire
     }
   }
   // Calcule et renvoie le controle des couleurs

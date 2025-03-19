@@ -22,3 +22,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ColorCell.svelte`
   - `ColorPicker.svelte`
   - `ColorControl.svelte`
+- Mise en place de la selection des couleurs, de la recherche de bonne couleur et de l'affichage des réussite et des erreurs

@@ -33,20 +33,18 @@
     border-radius: 50px;
     border: grey solid 1px;
     background-color: white;
+    
+    transition: all 0.2s ease;
   }
   .isPicker{
     cursor: pointer;
   }
   .isPicker:hover{
-    border: grey solid 3px;
+    scale:1.2;
   }
   
   .picker{
     position: absolute;
-    /* bottom: -100px; */
-    /* right: -100px; */
-
-    /* border: grey solid 1px; */
   }
 
 </style>
